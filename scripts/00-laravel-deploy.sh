@@ -9,6 +9,8 @@ echo "Caching routes..."
 php artisan route:cache
 
 echo "Running fresh migrations..."
-php artisan migrate:fresh
+php artisan migrate --force
+
+npm run build
 
 
