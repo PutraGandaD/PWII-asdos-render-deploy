@@ -1,6 +1,6 @@
 FROM richarvey/nginx-php-fpm:latest
 
-RUN apk --no-cache add nodejs npm
+RUN apk add --update nodejs npm
 
 COPY . .
 

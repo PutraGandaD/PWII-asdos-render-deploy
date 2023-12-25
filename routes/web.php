@@ -16,14 +16,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
-    return view('auth.login');
+    return Auth::check() ? redirect('/home') : redirect('/login');
 });
 
-// Route::get('/fakultas', function () {
-//     return view('fakultas');
-// });
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['checkRole:A,U'])->name('home');
 
 Route::middleware('auth')->group(function() {
     Route::resource('fakultas', FakultasController::class);
@@ -31,6 +30,6 @@ Route::middleware('auth')->group(function() {
     Route::resource('mahasiswa', MahasiswaController::class);
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['checkRole:A,U'])->name('home');
+
+
